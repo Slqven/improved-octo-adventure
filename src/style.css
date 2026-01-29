@@ -1,0 +1,468 @@
+/* ===================================
+   RESET & BASE STYLES
+   =================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 300;
+    line-height: 1.8;
+    color: #2a2a2a;
+    background-color: #faf8f5;
+    overflow-x: hidden;
+}
+
+/* ===================================
+   TYPOGRAPHY
+   =================================== */
+
+h1, h2, .hero-title, .promise-text, .section-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 300;
+    line-height: 1.3;
+}
+
+p {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+}
+
+/* ===================================
+   LAYOUT
+   =================================== */
+
+.section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8rem 2rem;
+    position: relative;
+}
+
+.container {
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.container-wide {
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* ===================================
+   SECTION 1: HERO
+   =================================== */
+
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #faf8f5 0%, #f5f1eb 50%, #faf8f5 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 50%, rgba(212, 175, 155, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(195, 157, 157, 0.12) 0%, transparent 50%),
+        radial-gradient(circle at 50% 20%, rgba(255, 200, 180, 0.08) 0%, transparent 60%);
+    pointer-events: none;
+    animation: subtleMove 20s ease-in-out infinite;
+}
+
+@keyframes subtleMove {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(20px, 20px); }
+}
+
+.hero-content {
+    text-align: center;
+    opacity: 0;
+    animation: fadeInHero 2.5s ease-out 0.5s forwards;
+}
+
+.hero-title {
+    font-size: clamp(3rem, 10vw, 6rem);
+    font-weight: 300;
+    font-style: italic;
+    color: #3a3a3a;
+    letter-spacing: 0.02em;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 2px 20px rgba(212, 175, 155, 0.2);
+}
+
+.hero-subtitle {
+    font-size: clamp(1rem, 2vw, 1.5rem);
+    font-weight: 300;
+    color: #8a8a8a;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    opacity: 0;
+    animation: fadeInSubtitle 2s ease-out 1.5s forwards;
+}
+
+@keyframes fadeInHero {
+    to { opacity: 1; }
+}
+
+@keyframes fadeInSubtitle {
+    to { opacity: 0.7; }
+}
+
+/* ===================================
+   SECTION 2: WHY SHE MATTERS
+   =================================== */
+
+.why-matters {
+    background: linear-gradient(180deg, #f5f1eb 0%, #faf8f5 100%);
+}
+
+.text-reveal {
+    text-align: center;
+}
+
+.reveal-line {
+    font-size: clamp(1.75rem, 4.5vw, 3rem);
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-style: italic;
+    color: #4a4a4a;
+    margin-bottom: 2rem;
+    opacity: 0;
+    transform: translateY(40px);
+    line-height: 1.6;
+}
+
+/* ===================================
+   SECTION 3: PHOTO GALLERY
+   =================================== */
+
+.gallery {
+    background: linear-gradient(180deg, #faf8f5 0%, #f5f1eb 100%);
+    padding: 10rem 2rem;
+}
+
+.section-title {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 300;
+    font-style: italic;
+    text-align: center;
+    color: #d4af9b;
+    margin-bottom: 5rem;
+    opacity: 0;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.gallery-item {
+    position: relative;
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transform: translateY(60px) scale(0.95);
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.gallery-item:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+.gallery-image {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.7s ease;
+}
+
+/* Gallery image backgrounds */
+.gallery-item[data-index="0"] .gallery-image { background-image: url('/Slike/16e545fd-ec95-4bf7-9b43-35c223d10b6b.jfif'); }
+.gallery-item[data-index="1"] .gallery-image { background-image: url('/Slike/55d52d6e-2d63-4f1b-ad84-fd62147b5e8d.jfif'); }
+.gallery-item[data-index="2"] .gallery-image { background-image: url('/Slike/61c496a8-2ca2-4d8c-9e67-05d94cd567f1.jfif'); }
+.gallery-item[data-index="3"] .gallery-image { background-image: url('/Slike/75a86d83-b21c-4fa8-961e-062607ab925e.jfif'); }
+.gallery-item[data-index="4"] .gallery-image { background-image: url('/Slike/319abbb6-d383-4cf5-b45f-3ff5ecea49ba.jfif'); }
+.gallery-item[data-index="5"] .gallery-image { background-image: url('/Slike/763dfadd-7289-456b-9144-98ac7b40cd93.jfif'); }
+.gallery-item[data-index="6"] .gallery-image { background-image: url('/Slike/907dff42-c6d2-46af-8f03-77a283c24e26.jfif'); }
+.gallery-item[data-index="7"] .gallery-image { background-image: url('/Slike/6519d686-e7b2-4ea7-b2ec-bf461a5888c8.jfif'); }
+.gallery-item[data-index="8"] .gallery-image { background-image: url('/Slike/af4a97be-d0e5-41e3-ab77-66c13f7cf1c6.jfif'); }
+.gallery-item[data-index="9"] .gallery-image { background-image: url('/Slike/b9ffe5ff-9c9d-4b58-aedd-e5ef0cb02bfb.jfif'); }
+.gallery-item[data-index="10"] .gallery-image { background-image: url('/Slike/b15ff0ae-d39e-44ef-866e-9337f20f9342.jfif'); }
+.gallery-item[data-index="11"] .gallery-image { background-image: url('/Slike/d281b6c7-7246-4420-af3f-9ab61a5e1229.jfif'); }
+.gallery-item[data-index="12"] .gallery-image { background-image: url('/Slike/e5d7e9c7-76aa-42ab-a353-eb38df7672af.jfif'); }
+.gallery-item[data-index="13"] .gallery-image { background-image: url('/Slike/e21ad828-8ddb-4dfa-b025-50b058c0de5f.jfif'); }
+.gallery-item[data-index="14"] .gallery-image { background-image: url('/Slike/ee6c4f22-b523-4b29-b974-2ea82ac4ce24.jfif'); }
+
+.gallery-item:hover .gallery-image {
+    transform: scale(1.1);
+}
+
+.gallery-caption {
+    text-align: center;
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    font-weight: 400;
+    color: #8a8a8a;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0;
+}
+
+/* ===================================
+   SECTION 4: WORDS FROM THE HEART
+   =================================== */
+
+.words-heart {
+    background: linear-gradient(180deg, #f5f1eb 0%, #faf8f5 100%);
+}
+
+.words-sequence {
+    text-align: center;
+}
+
+.word-line {
+    font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-style: italic;
+    color: #4a4a4a;
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    transform: translateY(30px);
+    line-height: 1.6;
+}
+
+/* ===================================
+   SECTION 5: QUIET PAUSE
+   =================================== */
+
+.quiet-pause {
+    min-height: 70vh;
+    background: linear-gradient(180deg, #faf8f5 0%, #f5f1eb 100%);
+}
+
+.pause-text {
+    font-size: 5rem;
+    font-family: 'Cormorant Garamond', serif;
+    text-align: center;
+    color: #d4af9b;
+    opacity: 0;
+    animation: heartbeat 2s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    10% { transform: scale(1.1); }
+    20% { transform: scale(1); }
+    30% { transform: scale(1.05); }
+    40% { transform: scale(1); }
+}
+
+/* ===================================
+   SECTION 6: THE JOURNEY
+   =================================== */
+
+.journey {
+    background: linear-gradient(180deg, #f5f1eb 0%, #faf8f5 100%);
+}
+
+.journey-text {
+    text-align: center;
+}
+
+.journey-line {
+    font-size: clamp(1.75rem, 4.5vw, 3rem);
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-style: italic;
+    color: #4a4a4a;
+    margin-bottom: 2rem;
+    opacity: 0;
+    transform: translateY(40px);
+    line-height: 1.6;
+}
+
+/* ===================================
+   SECTION 7: THE PROMISE
+   =================================== */
+
+.promise {
+    background: linear-gradient(135deg, #faf8f5 0%, #f5f1eb 50%, #faf8f5 100%);
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.promise::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 50% 50%, rgba(212, 175, 155, 0.2) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.promise-text {
+    font-size: clamp(2.5rem, 7vw, 5rem);
+    font-weight: 300;
+    font-style: italic;
+    text-align: center;
+    color: #d4af9b;
+    line-height: 1.4;
+    opacity: 0;
+    transform: scale(0.9);
+    text-shadow: 0 4px 30px rgba(212, 175, 155, 0.3);
+}
+
+/* ===================================
+   SECTION 8: CLOSING
+   =================================== */
+
+.closing {
+    background: linear-gradient(180deg, #faf8f5 0%, #f5f1eb 100%);
+    min-height: 90vh;
+}
+
+.closing-text {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-style: italic;
+    text-align: center;
+    color: #4a4a4a;
+    opacity: 0;
+    margin-bottom: 3rem;
+}
+
+.closing-text-small {
+    font-size: clamp(1.25rem, 3vw, 2rem);
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    text-align: center;
+    color: #8a8a8a;
+    opacity: 0;
+    margin-bottom: 1rem;
+}
+
+.infinity-text {
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    text-align: center;
+    color: #d4af9b;
+    opacity: 0;
+    margin-top: 4rem;
+    letter-spacing: 0.2em;
+}
+
+/* ===================================
+   RESPONSIVE
+   =================================== */
+
+@media (max-width: 1024px) {
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .section {
+        padding: 4rem 1rem;
+    }
+
+    .container, .container-wide {
+        padding: 0 1rem;
+    }
+
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+    }
+
+    .reveal-line,
+    .word-line,
+    .journey-line {
+        margin-bottom: 1.5rem;
+    }
+
+    .gallery {
+        padding: 6rem 1rem;
+    }
+
+    .section-title {
+        margin-bottom: 3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .pause-text {
+        font-size: 3rem;
+    }
+}
+
+/* ===================================
+   SMOOTH SCROLL
+   =================================== */
+
+html.lenis {
+    height: auto;
+}
+
+.lenis.lenis-smooth {
+    scroll-behavior: auto;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+    overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+    pointer-events: none;
+}
